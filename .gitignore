@@ -43,7 +43,7 @@ replay_*.log
 net/
 
 # local scripts
-publish-modrinth.sh
+publish.sh
 
 # claude memory
 .claude/
