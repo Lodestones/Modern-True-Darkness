@@ -41,3 +41,9 @@ replay_*.log
 
 # decompiled references
 net/
+
+# local scripts
+publish-modrinth.sh
+
+# claude memory
+.claude/
