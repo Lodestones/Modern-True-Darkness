@@ -1,6 +1,6 @@
 package grondag.darkness;
 
-import grondag.darkness.config.DarknessConfig;
+import grondag.darkness.config.DarknessSettings;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.networking.v1.ServerLoginConnectionEvents;
@@ -12,18 +12,16 @@ import net.minecraft.network.chat.Component;
 *///?} else {
 import net.minecraft.resources.ResourceLocation;
 //?}
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class DarknessInit implements ModInitializer {
     public static final String MOD_ID = "darkness";
     public static final String MOD_NAME = "TrueDarknessRefabricated";
-    public static final DarknessConfig CONFIG = DarknessConfig.createAndLoad();
+    public static final DarknessSettings CONFIG = DarknessSettings.load();
 
     @Override
     public void onInitialize() {
 
-        if (CONFIG.requireMod()) {
+        if (CONFIG.requireMod) {
             int protocolVersion = 0;
 
             ServerLoginConnectionEvents.QUERY_START.register((handler, server, sender, synchronizer) -> {

@@ -39,53 +39,25 @@ import static grondag.darkness.DarknessInit.CONFIG;
 @Environment(EnvType.CLIENT)
 public class Darkness {
 
-    static double darkNetherFogEffective;
-    static double darkEndFogEffective;
-
-    private static final float[] BTW_MOON_BRIGHTNESS_BY_PHASE = new float[]{1.25F, 0.875F, 0.75F, 0.5F, 0F, 0.5F, 0.75F, 1.25F};
-
-    /*
-    public static Logger LOG = LogManager.getLogger(DarknessInit.MOD_NAME);
-
-     * static { try { DarknessConfig.getInstance().darkNetherFog =
-     * Mth.clamp(DarknessConfig.getInstance().darkNetherFog, 0.0, 1.0); } catch
-     * (final Exception e) { DarknessConfig.getInstance().darkNetherFog = 0.5; LOG.
-     * warn("[Darkness] Invalid configuration value for 'dark_nether_fog'. Using default value."
-     * ); } try { DarknessConfig.getInstance().darkEndFog =
-     * Mth.clamp(DarknessConfigModel.getInstance().darkEndFog, 0.0, 1.0); } catch
-     * (final Exception e) { DarknessConfig.getInstance().darkEndFog = 0.0; LOG.
-     * warn("[Darkness] Invalid configuration value for 'dark_end_fog'. Using default value."
-     * ); } computeConfigValues(); }
-     */
-
-    private static void computeConfigValues() {
-        darkNetherFogEffective = CONFIG.darkNether() ? CONFIG.darkNetherFog() : 1.0;
-        darkEndFogEffective = CONFIG.darkEnd() ? CONFIG.darkEndFog() : 1.0;
-    }
-
     public static double darkNetherFog() {
-        computeConfigValues();
-        return darkNetherFogEffective;
+        return CONFIG.darkNether ? 0.5 : 1.0;
     }
 
     public static double darkEndFog() {
-        computeConfigValues();
-        return darkEndFogEffective;
+        return CONFIG.darkEnd ? 0.0 : 1.0;
     }
 
     private static boolean isDark(Level world) {
         final ResourceKey<Level> dimType = world.dimension();
 
         if (dimType == Level.OVERWORLD) {
-            return CONFIG.darkOverworld();
+            return CONFIG.darkOverworld;
         } else if (dimType == Level.NETHER) {
-            return CONFIG.darkNether();
+            return CONFIG.darkNether;
         } else if (dimType == Level.END) {
-            return CONFIG.darkEnd();
-        } else if (world.dimensionType().hasSkyLight()) {
-            return CONFIG.darkDefault();
+            return CONFIG.darkEnd;
         } else {
-            return CONFIG.darkSkyless();
+            return true;
         }
     }
 
@@ -96,20 +68,10 @@ public class Darkness {
         double e = 0.5 - Math.cos(d * Math.PI) / 2.0;
         return (float)(d * 2.0 + e) / 3.0f;
     }
-
-    private static final float[] MOON_BRIGHTNESS_PER_PHASE = new float[]{1.0F, 0.75F, 0.5F, 0.25F, 0.0F, 0.25F, 0.5F, 0.75F};
-
-    private static float computeMoonBrightness(Level world) {
-        return MOON_BRIGHTNESS_PER_PHASE[computeMoonPhase(world)];
-    }
-
-    private static int computeMoonPhase(Level world) {
-        return (int)(world.getDayTime() / 24000L % 8L + 8L) % 8;
-    }
     *///?}
 
     private static float skyFactor(Level world) {
-        if (!CONFIG.blockLightOnly() && isDark(world)) {
+        if (isDark(world)) {
             if (world.dimensionType().hasSkyLight()) {
                 //? if >=1.21.11 {
                 /*final float angle = computeTimeOfDay(world);
@@ -119,24 +81,7 @@ public class Darkness {
 
                 if (angle > 0.25f && angle < 0.75f) {
                     final float oldWeight = Math.max(0, (Math.abs(angle - 0.5f) - 0.2f)) * 20;
-                    //? if >=1.21.11 {
-                    /*final float moon = CONFIG.ignoreMoonPhase() ? 0 : computeMoonBrightness(world);
-                    *///?} else {
-                    final float moon = CONFIG.ignoreMoonPhase() ? 0 : world.getMoonBrightness();
-                    //?}
-
-                    // The case values DEFAULT, GRADUAL & BTW will show as not being defined. But I can assure you that they work just fine.
-                    float moonBrightness = switch (CONFIG.moonPhaseStyle()) {
-                        case DEFAULT -> moon * moon;
-                        case GRADUAL -> moon;
-                        //? if >=1.21.11 {
-                        /*case BTW -> BTW_MOON_BRIGHTNESS_BY_PHASE[computeMoonPhase(world)];
-                        *///?} else {
-                        case BTW -> BTW_MOON_BRIGHTNESS_BY_PHASE[world.getMoonPhase()];
-                        //?}
-                    };
-                    return Mth.lerp(oldWeight * oldWeight * oldWeight, moonBrightness, 1.0f);
-
+                    return Mth.lerp(oldWeight * oldWeight * oldWeight, 0f, 1.0f);
                 } else {
                     return 1;
                 }
@@ -149,6 +94,7 @@ public class Darkness {
     }
 
     public static boolean enabled = false;
+    public static float skyDarkness = 1.0f;
     private static final float[][] LUMINANCE = new float[16][16];
 
     public static int darken(int c, int blockIndex, int skyIndex) {
@@ -198,12 +144,14 @@ public class Darkness {
                     //?}
             ) {
                 enabled = false;
+                skyDarkness = 1.0f;
                 return;
             } else {
                 enabled = true;
             }
 
             final float dimSkyFactor = Darkness.skyFactor(world);
+            skyDarkness = dimSkyFactor;
             //? if >=1.21.11 {
             /*final float timeAngle = computeTimeOfDay(world);
             float ambient = 1.0F - (Mth.cos(timeAngle * ((float)Math.PI * 2F)) * 2.0F + 0.5F);

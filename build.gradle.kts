@@ -47,10 +47,6 @@ repositories {
     strictMaven("https://www.cursemaven.com", "CurseForge", "curse.maven")
     strictMaven("https://api.modrinth.com/maven", "Modrinth", "maven.modrinth")
 
-    strictMaven("https://maven.wispforest.io", "Wisp Forest", "io.wispforest", "io.wispforest.endec")
-    //maven("https://maven.wispforest.io")
-    maven("https://jitpack.io")
-
     maven("https://maven.ladysnake.org/releases")
     maven("https://maven.ladysnake.org/snapshots")
     maven("https://maven.quiltmc.org/repository/release")
@@ -83,11 +79,7 @@ dependencies {
     )
     */
 
-    modImplementation("io.wispforest:owo-lib:${deps["owo_lib"]}")
-    annotationProcessor("io.wispforest:owo-lib:${deps["owo_lib"]}")
-    include("io.wispforest:owo-sentinel:${deps["owo_lib"]}")
-
-    modRuntimeOnly("maven.modrinth:modmenu:${deps["mod_menu"]}")
+    modImplementation("maven.modrinth:modmenu:${deps["mod_menu"]}")
 
     // Statement ensures that Apoli doesn't get applied to 1.20.6
     if (mcVersion != "1.20.6" && stonecutter.eval(mcVersion, "<=1.21.1")){

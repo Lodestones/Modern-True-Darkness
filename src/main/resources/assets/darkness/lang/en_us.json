@@ -1,26 +1,8 @@
 {
     "text.config.darkness.title": "True Darkness Refabricated Config",
-    "text.config.darkness.option.blockLightOnly": "Affect Block Light Only",
-    "text.config.darkness.help.blockLightOnly": "Areas lit by sky will not be fully dark",
-    "text.config.darkness.option.ignoreMoonPhase": "Ignore Moon Phase",
-    "text.config.darkness.option.moonPhaseStyle": "Moon Phase Darkening Style",
-    "text.config.darkness.option.moonPhaseStyle.value.default": "Default",
-    "text.config.darkness.option.moonPhaseStyle.value.gradual": "Gradual",
-    "text.config.darkness.option.moonPhaseStyle.value.btw": "Better Than Wolves",
-    "text.config.darkness.help.ignore_moon_phase": "Night is truly dark even when the moon is full",
     "text.config.darkness.option.darkOverworld": "Dark Overworld",
-    "text.config.darkness.help.darkOverworld": "Enable in Overworld",
     "text.config.darkness.option.darkNether": "Dark Nether",
-    "text.config.darkness.help.darkNether": "Enable in Nether",
     "text.config.darkness.option.darkEnd": "Dark End",
-    "text.config.darkness.help.darkEnd": "Enable in The End",
-    "text.config.darkness.option.darkDefault": "Modded Dimension Darkness",
-    "text.config.darkness.help.darkDefault": "Enable in modded dimensions with a sky",
-    "text.config.darkness.option.darkSkyless": "Modded Skyless Dimension Darkness",
-    "text.config.darkness.help.darkSkyless": "Enable in modded dimensions with no sky",
-    "text.config.darkness.option.darkNetherFog": "Dark Nether Fog",
-    "text.config.darkness.help.darkNetherFog": "Amount of fog in Nether",
-    "text.config.darkness.option.darkEndFog": "Dark End Fog",
-    "text.config.darkness.help.darkEndFog": "Amount of fog in The End",
-    "text.config.darkness.option.requireMod": "Require mod to join [Server only]"
+    "text.config.darkness.option.requireMod": "Require Mod to Join [Server Only]",
+    "text.config.darkness.option.darknessIntensity": "Darkness Intensity"
 }
