@@ -15,8 +15,8 @@ public class DarknessSettings {
     private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("darkness.json");
 
     public boolean darkOverworld = true;
-    public boolean darkNether = true;
-    public boolean darkEnd = true;
+    public boolean darkNether = false;
+    public boolean darkEnd = false;
     public boolean requireMod = false;
     public int darknessIntensity = 75;
 
