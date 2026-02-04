@@ -132,7 +132,8 @@ public class Darkness {
         ApoliCompat apoliCompat = new ApoliCompat();
 
         if (world != null) {
-            if (!isDark(world) || client.player.hasEffect(MobEffects.NIGHT_VISION)
+            if (!isDark(world) || client.player.isCreative() || client.player.isSpectator()
+                    || client.player.hasEffect(MobEffects.NIGHT_VISION)
                     || (client.player.hasEffect(MobEffects.CONDUIT_POWER) && client.player.getWaterVision() > 0)
                     //? if >=1.21.11 {
                     /*|| world.getThunderLevel(0) > 0.9F
