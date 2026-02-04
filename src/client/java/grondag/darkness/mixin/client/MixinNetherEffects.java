@@ -27,14 +27,21 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+//? if <=1.21.10 {
 import net.minecraft.client.renderer.DimensionSpecialEffects;
+//?}
 import net.minecraft.world.phys.Vec3;
 
 import grondag.darkness.Darkness;
 
+//? if <=1.21.10 {
 @Mixin(DimensionSpecialEffects.NetherEffects.class)
+//?} else {
+/*@Mixin(net.minecraft.client.Minecraft.class)
+*///?}
 @Environment(EnvType.CLIENT)
 public class MixinNetherEffects {
+    //? if <=1.21.10 {
     private static double MIN = 0.029999999329447746D;
 
     @Inject(method = "getBrightnessDependentFogColor", at = @At(value = "RETURN"), cancellable = true)
@@ -48,4 +55,5 @@ public class MixinNetherEffects {
             ci.setReturnValue(result);
         }
     }
+    //?}
 }

@@ -49,6 +49,7 @@ repositories {
 
     strictMaven("https://maven.wispforest.io", "Wisp Forest", "io.wispforest", "io.wispforest.endec")
     //maven("https://maven.wispforest.io")
+    maven("https://jitpack.io")
 
     maven("https://maven.ladysnake.org/releases")
     maven("https://maven.ladysnake.org/snapshots")
@@ -89,7 +90,7 @@ dependencies {
     modRuntimeOnly("maven.modrinth:modmenu:${deps["mod_menu"]}")
 
     // Statement ensures that Apoli doesn't get applied to 1.20.6
-    if (mcVersion != "1.20.6"){
+    if (mcVersion != "1.20.6" && stonecutter.eval(mcVersion, "<=1.21.1")){
         modCompileOnly("io.github.apace100:apoli:${deps["apoli"]}")
         //modRuntimeOnly("maven.modrinth:origins:${deps["origins"]}") // (Note that this causes runClient to crash upon opening the world creation screen in 1.20.1. When testing that Minecraft version, insert Origins jar manually)
     }

@@ -99,3 +99,147 @@ jobs:
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           name: v${{github.ref_name}} for Fabric 1.21.1
           files: 'versions/1.21.1/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.10-Fabric-Curseforge
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          curseforge-id: 906926
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.10
+          files: 'versions/1.21.10/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.10-Fabric-Modrinth
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          modrinth-id: Pf8PJBb5
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.10
+          files: 'versions/1.21.10/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.11-Fabric-Curseforge
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          curseforge-id: 906926
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.11
+          files: 'versions/1.21.11/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.11-Fabric-Modrinth
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          modrinth-id: Pf8PJBb5
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.11
+          files: 'versions/1.21.11/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.2-Fabric-Curseforge
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          curseforge-id: 906926
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.2
+          files: 'versions/1.21.2/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.2-Fabric-Modrinth
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          modrinth-id: Pf8PJBb5
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.2
+          files: 'versions/1.21.2/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.4-Fabric-Curseforge
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          curseforge-id: 906926
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.4
+          files: 'versions/1.21.4/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.4-Fabric-Modrinth
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          modrinth-id: Pf8PJBb5
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.4
+          files: 'versions/1.21.4/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.5-Fabric-Curseforge
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          curseforge-id: 906926
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.5
+          files: 'versions/1.21.5/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.5-Fabric-Modrinth
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          modrinth-id: Pf8PJBb5
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.5
+          files: 'versions/1.21.5/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.6-Fabric-Curseforge
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          curseforge-id: 906926
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.6
+          files: 'versions/1.21.6/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.6-Fabric-Modrinth
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          modrinth-id: Pf8PJBb5
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.6
+          files: 'versions/1.21.6/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.7-Fabric-Curseforge
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          curseforge-id: 906926
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.7
+          files: 'versions/1.21.7/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.7-Fabric-Modrinth
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          modrinth-id: Pf8PJBb5
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.7
+          files: 'versions/1.21.7/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.8-Fabric-Curseforge
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          curseforge-id: 906926
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.8
+          files: 'versions/1.21.8/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.8-Fabric-Modrinth
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          modrinth-id: Pf8PJBb5
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.8
+          files: 'versions/1.21.8/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.9-Fabric-Curseforge
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          curseforge-id: 906926
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.9
+          files: 'versions/1.21.9/build/libs/!(*-@(dev|sources|javadoc|all)).jar'
+
+      - name: Publish-1.21.9-Fabric-Modrinth
+        uses: Kir-Antipov/mc-publish@v3.3.0
+        with:
+          modrinth-id: Pf8PJBb5
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          name: v${{github.ref_name}} for Fabric 1.21.9
+          files: 'versions/1.21.9/build/libs/!(*-@(dev|sources|javadoc|all)).jar'

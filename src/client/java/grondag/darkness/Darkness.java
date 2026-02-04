@@ -89,20 +89,51 @@ public class Darkness {
         }
     }
 
+    //? if >=1.21.11 {
+    /*private static float computeTimeOfDay(Level world) {
+        long dayTime = world.getDayTime();
+        double d = Mth.frac((double)dayTime / 24000.0 - 0.25);
+        double e = 0.5 - Math.cos(d * Math.PI) / 2.0;
+        return (float)(d * 2.0 + e) / 3.0f;
+    }
+
+    private static final float[] MOON_BRIGHTNESS_PER_PHASE = new float[]{1.0F, 0.75F, 0.5F, 0.25F, 0.0F, 0.25F, 0.5F, 0.75F};
+
+    private static float computeMoonBrightness(Level world) {
+        return MOON_BRIGHTNESS_PER_PHASE[computeMoonPhase(world)];
+    }
+
+    private static int computeMoonPhase(Level world) {
+        return (int)(world.getDayTime() / 24000L % 8L + 8L) % 8;
+    }
+    *///?}
+
     private static float skyFactor(Level world) {
         if (!CONFIG.blockLightOnly() && isDark(world)) {
             if (world.dimensionType().hasSkyLight()) {
+                //? if >=1.21.11 {
+                /*final float angle = computeTimeOfDay(world);
+                *///?} else {
                 final float angle = world.getTimeOfDay(0);
+                //?}
 
                 if (angle > 0.25f && angle < 0.75f) {
                     final float oldWeight = Math.max(0, (Math.abs(angle - 0.5f) - 0.2f)) * 20;
+                    //? if >=1.21.11 {
+                    /*final float moon = CONFIG.ignoreMoonPhase() ? 0 : computeMoonBrightness(world);
+                    *///?} else {
                     final float moon = CONFIG.ignoreMoonPhase() ? 0 : world.getMoonBrightness();
+                    //?}
 
                     // The case values DEFAULT, GRADUAL & BTW will show as not being defined. But I can assure you that they work just fine.
                     float moonBrightness = switch (CONFIG.moonPhaseStyle()) {
                         case DEFAULT -> moon * moon;
                         case GRADUAL -> moon;
+                        //? if >=1.21.11 {
+                        /*case BTW -> BTW_MOON_BRIGHTNESS_BY_PHASE[computeMoonPhase(world)];
+                        *///?} else {
                         case BTW -> BTW_MOON_BRIGHTNESS_BY_PHASE[world.getMoonPhase()];
+                        //?}
                     };
                     return Mth.lerp(oldWeight * oldWeight * oldWeight, moonBrightness, 1.0f);
 
@@ -122,6 +153,17 @@ public class Darkness {
 
     public static int darken(int c, int blockIndex, int skyIndex) {
         final float lTarget = LUMINANCE[blockIndex][skyIndex];
+        //? if >=1.21.2 {
+        /*final float r = ((c >> 16) & 0xFF) / 255f;
+        final float g = ((c >> 8) & 0xFF) / 255f;
+        final float b = (c & 0xFF) / 255f;
+        final float l = luminance(r, g, b);
+        final float f = l > 0 ? Math.min(1, lTarget / l) : 0;
+
+        return f == 1f ? c
+                : 0xFF000000 | (Math.round(f * r * 255) << 16) | (Math.round(f * g * 255) << 8)
+                        | Math.round(f * b * 255);
+        *///?} else {
         final float r = (c & 0xFF) / 255f;
         final float g = ((c >> 8) & 0xFF) / 255f;
         final float b = ((c >> 16) & 0xFF) / 255f;
@@ -131,6 +173,7 @@ public class Darkness {
         return f == 1f ? c
                 : 0xFF000000 | Math.round(f * r * 255) | (Math.round(f * g * 255) << 8)
                         | (Math.round(f * b * 255) << 16);
+        //?}
     }
 
     public static float luminance(float r, float g, float b) {
@@ -145,8 +188,12 @@ public class Darkness {
         if (world != null) {
             if (!isDark(world) || client.player.hasEffect(MobEffects.NIGHT_VISION)
                     || (client.player.hasEffect(MobEffects.CONDUIT_POWER) && client.player.getWaterVision() > 0)
+                    //? if >=1.21.11 {
+                    /*|| world.getThunderLevel(0) > 0.9F
+                    *///?} else {
                     || world.getSkyFlashTime() > 0
-                    //? if !(=1.20.5 || =1.20.6) {
+                    //?}
+                    //? if <=1.21.1 && !(=1.20.5 || =1.20.6) {
                     || apoliCompat.isApoliNightVisionPower(client)
                     //?}
             ) {
@@ -157,7 +204,16 @@ public class Darkness {
             }
 
             final float dimSkyFactor = Darkness.skyFactor(world);
+            //? if >=1.21.11 {
+            /*final float timeAngle = computeTimeOfDay(world);
+            float ambient = 1.0F - (Mth.cos(timeAngle * ((float)Math.PI * 2F)) * 2.0F + 0.5F);
+            ambient = Mth.clamp(ambient, 0.0F, 1.0F);
+            ambient = 1.0F - ambient;
+            ambient *= 1.0F - world.getRainLevel(0) * 5.0F / 16.0F;
+            ambient *= 1.0F - world.getThunderLevel(0) * 5.0F / 16.0F;
+            *///?} else {
             final float ambient = world.getSkyDarken(1.0F);
+            //?}
             final DimensionType dim = world.dimensionType();
             final boolean blockAmbient = !Darkness.isDark(world);
 

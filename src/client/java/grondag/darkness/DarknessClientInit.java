@@ -6,7 +6,11 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientLoginNetworking;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.login.ClientboundLoginDisconnectPacket;
+//? if >=1.21.11 {
+/*import net.minecraft.resources.Identifier;
+*///?} else {
 import net.minecraft.resources.ResourceLocation;
+//?}
 
 import java.util.concurrent.CompletableFuture;
 
@@ -15,7 +19,9 @@ public class DarknessClientInit implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         int protocolVersion = 0;
-        //? if >=1.21 {
+        //? if >=1.21.11 {
+        /*ClientLoginNetworking.registerGlobalReceiver(Identifier.parse(DarknessInit.MOD_ID),
+        *///?} else if >=1.21 {
         ClientLoginNetworking.registerGlobalReceiver(ResourceLocation.parse(DarknessInit.MOD_ID),
         //?} else if <1.21 {
         /*ClientLoginNetworking.registerGlobalReceiver(ResourceLocation.tryParse(DarknessInit.MOD_ID),

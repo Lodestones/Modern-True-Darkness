@@ -41,6 +41,10 @@ import net.minecraft.client.DeltaTracker;
 /*import com.mojang.blaze3d.vertex.PoseStack;
 *///?}
 
+//? if >=1.21.2 {
+/*import net.minecraft.util.profiling.Profiler;
+*///?}
+
 @Mixin(GameRenderer.class)
 @Environment(EnvType.CLIENT)
 public class MixinGameRenderer {
@@ -60,14 +64,22 @@ public class MixinGameRenderer {
         final LightmapAccess lightmap = (LightmapAccess) lightTexture;
 
         if (lightmap.darkness_isDirty()) {
+            //? if >=1.21.2 {
+            /*Profiler.get().push("lightTex");
+            *///?} else {
             minecraft.getProfiler().push("lightTex");
+            //?}
             //? if >=1.21 {
             Darkness.updateLuminance(deltaTracker.getGameTimeDeltaTicks(), minecraft, (GameRenderer) (Object) this,
                 lightmap.darkness_prevFlicker());
             //?} else {
             /*Darkness.updateLuminance(tickDelta, minecraft, (GameRenderer) (Object) this, lightmap.darkness_prevFlicker());
             *///?}
+            //? if >=1.21.2 {
+            /*Profiler.get().pop();
+            *///?} else {
             minecraft.getProfiler().pop();
+            //?}
         }
     }
 }
