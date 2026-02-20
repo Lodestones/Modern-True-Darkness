@@ -100,7 +100,6 @@ import net.minecraft.world.attribute.EnvironmentAttributes;
 *///?}
 
 import grondag.darkness.Darkness;
-import grondag.darkness.DarknessInit;
 import grondag.darkness.LightmapAccess;
 
 @Mixin(LightTexture.class)
@@ -264,8 +263,7 @@ public class MixinLightTexture implements LightmapAccess {
                 float darknessScale = this.calculateDarknessScale(this.minecraft.player, darknessGamma, f) * darknessEffectScale;
 
                 // === DARKNESS MODIFICATION: boost DarknessScale to overcome shader floor ===
-                float intensityFactor = DarknessInit.CONFIG.darknessIntensity / 100.0f;
-                darknessScale = Math.max(darknessScale, (1.0f - Darkness.skyDarkness) * intensityFactor * 0.15f);
+                darknessScale = Math.max(darknessScale, (1.0f - Darkness.skyDarkness) * 0.15f);
 
                 float waterVision = this.minecraft.player.getWaterVision();
                 float nightVisionFactor;
@@ -283,8 +281,8 @@ public class MixinLightTexture implements LightmapAccess {
                 ^///?}
                 float gamma = ((Double) this.minecraft.options.gamma().get()).floatValue();
 
-                // === DARKNESS MODIFICATION: darken gamma ===
-                gamma *= Darkness.skyDarkness;
+                // === DARKNESS MODIFICATION: darken gamma with cave brightness blending ===
+                gamma *= Mth.lerp(Darkness.caveBrightnessFactor, Darkness.skyDarkness, 1.0f);
 
                 // --- Render lightmap (version-specific) ---
                 //? if >=1.21.11 {

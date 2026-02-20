@@ -95,7 +95,25 @@ public class Darkness {
 
     public static boolean enabled = false;
     public static float skyDarkness = 1.0f;
+    public static float caveBrightnessFactor = 0.0f;
     private static final float[][] LUMINANCE = new float[16][16];
+
+    private static int getMoonPhaseBrightness(Level world) {
+        if (!world.dimensionType().hasSkyLight()) return 0;
+        //? if >=1.21.11 {
+        /*int phase = (int)(world.getDayTime() / 24000L % 8L + 8L) % 8;
+        *///?} else {
+        int phase = world.getMoonPhase();
+        //?}
+        return switch (phase) {
+            case 0 -> CONFIG.fullMoonBrightness;
+            case 1, 7 -> CONFIG.gibbousMoonBrightness;
+            case 2, 6 -> CONFIG.quarterMoonBrightness;
+            case 3, 5 -> CONFIG.crescentMoonBrightness;
+            case 4 -> CONFIG.newMoonBrightness;
+            default -> 0;
+        };
+    }
 
     public static int darken(int c, int blockIndex, int skyIndex) {
         final float lTarget = LUMINANCE[blockIndex][skyIndex];
@@ -132,7 +150,7 @@ public class Darkness {
         ApoliCompat apoliCompat = new ApoliCompat();
 
         if (world != null) {
-            if (!isDark(world) || client.player.isCreative() || client.player.isSpectator()
+            if (!isDark(world) || (!CONFIG.darkCreative && client.player.isCreative()) || client.player.isSpectator()
                     || client.player.hasEffect(MobEffects.NIGHT_VISION)
                     || (client.player.hasEffect(MobEffects.CONDUIT_POWER) && client.player.getWaterVision() > 0)
                     //? if >=1.21.11 {
@@ -152,7 +170,10 @@ public class Darkness {
             }
 
             final float dimSkyFactor = Darkness.skyFactor(world);
-            skyDarkness = dimSkyFactor;
+            final int moonBrightness = getMoonPhaseBrightness(world);
+            final float moonFactor = Mth.clamp(moonBrightness / 100.0f, 0f, 1f);
+            skyDarkness = dimSkyFactor + (1.0f - dimSkyFactor) * moonFactor;
+            caveBrightnessFactor = Mth.clamp(CONFIG.caveBrightness / 100.0f, 0f, 1f);
             //? if >=1.21.11 {
             /*final float timeAngle = computeTimeOfDay(world);
             float ambient = 1.0F - (Mth.cos(timeAngle * ((float)Math.PI * 2F)) * 2.0F + 0.5F);
@@ -270,7 +291,12 @@ public class Darkness {
                         blue = 0.0F;
                     }
 
-                    LUMINANCE[blockIndex][skyIndex] = Darkness.luminance(red, green, blue);
+                    float luminance = Darkness.luminance(red, green, blue);
+                    if (skyIndex == 0 && caveBrightnessFactor > 0) {
+                        float caveFloor = caveBrightnessFactor * 0.5f;
+                        luminance = Math.max(luminance, caveFloor);
+                    }
+                    LUMINANCE[blockIndex][skyIndex] = luminance;
                 }
             }
         }

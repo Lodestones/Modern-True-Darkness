@@ -17,8 +17,14 @@ public class DarknessSettings {
     public boolean darkOverworld = true;
     public boolean darkNether = false;
     public boolean darkEnd = false;
+    public boolean darkCreative = false;
     public boolean requireMod = false;
-    public int darknessIntensity = 75;
+    public int fullMoonBrightness = 50;
+    public int gibbousMoonBrightness = 30;
+    public int quarterMoonBrightness = 15;
+    public int crescentMoonBrightness = 5;
+    public int newMoonBrightness = 0;
+    public int caveBrightness = 0;
 
     public static DarknessSettings load() {
         if (Files.exists(CONFIG_PATH)) {

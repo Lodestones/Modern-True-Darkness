@@ -3,6 +3,12 @@
     "text.config.darkness.option.darkOverworld": "Dark Overworld",
     "text.config.darkness.option.darkNether": "Dark Nether",
     "text.config.darkness.option.darkEnd": "Dark End",
+    "text.config.darkness.option.darkCreative": "Dark Creative Mode",
     "text.config.darkness.option.requireMod": "Require Mod to Join [Server Only]",
-    "text.config.darkness.option.darknessIntensity": "Darkness Intensity"
+    "text.config.darkness.option.fullMoonBrightness": "Full Moon Brightness",
+    "text.config.darkness.option.gibbousMoonBrightness": "Gibbous Moon Brightness",
+    "text.config.darkness.option.quarterMoonBrightness": "Quarter Moon Brightness",
+    "text.config.darkness.option.crescentMoonBrightness": "Crescent Moon Brightness",
+    "text.config.darkness.option.newMoonBrightness": "New Moon Brightness",
+    "text.config.darkness.option.caveBrightness": "Cave Brightness"
 }
