@@ -153,11 +153,6 @@ public class Darkness {
             if (!isDark(world) || (!CONFIG.darkCreative && client.player.isCreative()) || client.player.isSpectator()
                     || client.player.hasEffect(MobEffects.NIGHT_VISION)
                     || (client.player.hasEffect(MobEffects.CONDUIT_POWER) && client.player.getWaterVision() > 0)
-                    //? if >=1.21.11 {
-                    /*|| world.getThunderLevel(0) > 0.9F
-                    *///?} else {
-                    || world.getSkyFlashTime() > 0
-                    //?}
                     //? if <=1.21.1 && !(=1.20.5 || =1.20.6) {
                     || apoliCompat.isApoliNightVisionPower(client)
                     //?}
