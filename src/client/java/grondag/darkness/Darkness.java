@@ -96,6 +96,7 @@ public class Darkness {
     public static boolean enabled = false;
     public static float skyDarkness = 1.0f;
     public static float caveBrightnessFactor = 0.0f;
+    public static float caveGammaFactor = 1.0f;
     private static final float[][] LUMINANCE = new float[16][16];
 
     private static int getMoonPhaseBrightness(Level world) {
@@ -159,6 +160,7 @@ public class Darkness {
             ) {
                 enabled = false;
                 skyDarkness = 1.0f;
+                caveGammaFactor = 1.0f;
                 return;
             } else {
                 enabled = true;
@@ -169,6 +171,11 @@ public class Darkness {
             final float moonFactor = Mth.clamp(moonBrightness / 100.0f, 0f, 1f);
             skyDarkness = dimSkyFactor + (1.0f - dimSkyFactor) * moonFactor;
             caveBrightnessFactor = Mth.clamp(CONFIG.caveBrightness / 100.0f, 0f, 1f);
+            // When cavesFollowDaylight is off, gamma is decoupled from surface time so
+            // sunless caves stay dark regardless of day/night; sunlit areas still lit via skyFactor.
+            caveGammaFactor = CONFIG.cavesFollowDaylight
+                    ? Mth.lerp(caveBrightnessFactor, skyDarkness, 1.0f)
+                    : caveBrightnessFactor;
             //? if >=1.21.11 {
             /*final float timeAngle = computeTimeOfDay(world);
             float ambient = 1.0F - (Mth.cos(timeAngle * ((float)Math.PI * 2F)) * 2.0F + 0.5F);

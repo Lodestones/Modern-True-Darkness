@@ -42,6 +42,7 @@ public class DarknessConfigScreen extends Screen {
         list.addWidgetEntry(createToggle("darkEnd", config.darkEnd, (b, v) -> config.darkEnd = v));
         list.addWidgetEntry(createToggle("darkCreative", config.darkCreative, (b, v) -> config.darkCreative = v));
         list.addWidgetEntry(createToggle("requireMod", config.requireMod, (b, v) -> config.requireMod = v));
+        list.addWidgetEntry(createToggle("cavesFollowDaylight", config.cavesFollowDaylight, (b, v) -> config.cavesFollowDaylight = v));
 
         // Sliders
         list.addWidgetEntry(new BrightnessSlider("fullMoonBrightness", config.fullMoonBrightness, v -> config.fullMoonBrightness = v));

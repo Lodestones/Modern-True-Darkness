@@ -25,6 +25,7 @@ public class DarknessSettings {
     public int crescentMoonBrightness = 5;
     public int newMoonBrightness = 0;
     public int caveBrightness = 0;
+    public boolean cavesFollowDaylight = false;
 
     public static DarknessSettings load() {
         if (Files.exists(CONFIG_PATH)) {

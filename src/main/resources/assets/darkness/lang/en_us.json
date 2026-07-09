@@ -10,5 +10,6 @@
     "text.config.darkness.option.quarterMoonBrightness": "Quarter Moon Brightness",
     "text.config.darkness.option.crescentMoonBrightness": "Crescent Moon Brightness",
     "text.config.darkness.option.newMoonBrightness": "New Moon Brightness",
-    "text.config.darkness.option.caveBrightness": "Cave Brightness"
+    "text.config.darkness.option.caveBrightness": "Cave Brightness",
+    "text.config.darkness.option.cavesFollowDaylight": "Caves Follow Daylight"
 }

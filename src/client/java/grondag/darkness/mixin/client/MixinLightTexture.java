@@ -40,7 +40,6 @@ import net.minecraft.client.renderer.LightTexture;
 /*import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.util.Mth;
 import net.minecraft.util.profiling.Profiler;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.effect.MobEffects;
@@ -282,7 +281,7 @@ public class MixinLightTexture implements LightmapAccess {
                 float gamma = ((Double) this.minecraft.options.gamma().get()).floatValue();
 
                 // === DARKNESS MODIFICATION: darken gamma with cave brightness blending ===
-                gamma *= Mth.lerp(Darkness.caveBrightnessFactor, Darkness.skyDarkness, 1.0f);
+                gamma *= Darkness.caveGammaFactor;
 
                 // --- Render lightmap (version-specific) ---
                 //? if >=1.21.11 {
